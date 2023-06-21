@@ -11,7 +11,7 @@ public class ExportDataService : IExportDataService
 {
     public string Name { get; set; }
     private readonly string _path = Environment.CurrentDirectory + "\\Results\\";
-    private readonly string _fileName;
+    private readonly string _fileName; 
     private readonly JsonSerializerOptions _options =
        new() { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
 
