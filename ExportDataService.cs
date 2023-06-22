@@ -11,14 +11,14 @@ public class ExportDataService : IExportDataService
 {
     public string Name { get; set; }
     private readonly string _path = Environment.CurrentDirectory + "\\Results\\";
-    private readonly string _fileName; 
+    private readonly string _fileName;
     private readonly JsonSerializerOptions _options =
        new() { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
 
     public ExportDataService(string projectId)
     {
         Name = projectId;
-        _fileName = _path + $"\\{Name}\\" + $"{Name}";
+        _fileName = _fileName = _path + $"\\{Name}\\" + $"{Name}";
         if (!Directory.Exists(_path + Name))
         {
             Directory.CreateDirectory(_path + Name);
@@ -31,12 +31,12 @@ public class ExportDataService : IExportDataService
             WriteIndented = true
         };
         var jsonString = JsonSerializer.Serialize(obj, options);
-        return File.WriteAllTextAsync($"{_fileName}.json", jsonString);
+        return File.WriteAllTextAsync(_path + $"\\{Name}\\" + $"{Name}.json", jsonString);
     }
 
     public Task SaveDataToCsvAsync(IList<dynamic> objects)
     {
-        using var writer = new StreamWriter($"{_fileName}.csv");
+        using var writer = new StreamWriter(_path + $"\\{Name}\\" + $"{Name}.csv");
         using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
         return csv.WriteRecordsAsync(objects);
     }
@@ -44,14 +44,14 @@ public class ExportDataService : IExportDataService
     public async Task SaveDataToPdfAsync(IList<dynamic> objects)
     {
         await SaveDataToJsonAsync(objects);
-        var workbook = new Workbook($"{_fileName}.json");
-        workbook.Save($"{_fileName}.pdf");
+        var workbook = new Workbook(_path + $"\\{Name}\\" + $"{Name}.json");
+        workbook.Save(_path + $"\\{Name}\\" + Name + $"{Name}.pdf");
     }
 
     public async Task SaveDataToTxtAsync(IList<dynamic> objects)
     {
         await SaveDataToJsonAsync(objects);
-        var workbook = new Workbook($"{_fileName}.json");
-        workbook.Save($"{_fileName}.txt");
+        var workbook = new Workbook(_path + $"\\{Name}\\" + $"{Name}.json");
+        workbook.Save(_path + $"\\{Name}\\" + $"{Name}.txt");
     }
 }
