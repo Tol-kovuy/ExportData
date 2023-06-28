@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExportData.Migrations
 {
     [DbContext(typeof(CrawlerDbContext))]
-    [Migration("20230622153928_Init")]
+    [Migration("20230623053555_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -44,8 +44,8 @@ namespace ExportData.Migrations
                     b.Property<bool>("TargetRequired")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");

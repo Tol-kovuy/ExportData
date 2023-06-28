@@ -10,6 +10,4 @@ public class CrawlerCommand
     public string Value { get; set; }
     public string Description { get; set; }
     public bool Enabled { get; set; }
-    public bool TargetRequired { get; set; }
-    public bool ValueRequired { get; set; }
 }

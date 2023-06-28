@@ -38,13 +38,9 @@ public class CrawlerCommandBuilder
                 {
                     Type = command,
                     Target = command.GetAttributeValue<NameAttribute, string>(attr => attr.Name),
-                    Description = command.GetAttributeValue<DescriptionAttribute, string>(attr => attr.Description),
-                    TargetRequired = command.HasArgumentTypeAttributes(),
-                    ValueRequired = command.HasValueTypeAttributes()
+                    Description = command.GetAttributeValue<DescriptionAttribute, string>(attr => attr.Description)
                 };
 
-                _context.CrawlerCommands.Add(crawlerCommand);
-                _context.SaveChanges();
             }
         }
     }
